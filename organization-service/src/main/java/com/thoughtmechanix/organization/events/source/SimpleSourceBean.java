@@ -16,6 +16,7 @@ public class SimpleSourceBean {
 
     private static final Logger logger = LoggerFactory.getLogger(SimpleSourceBean.class);
 
+    // 将注入一个Source接口  以供服务使用
     @Autowired
     public SimpleSourceBean(Source source){
         this.source = source;
@@ -27,6 +28,7 @@ public class SimpleSourceBean {
                 OrganizationChangeModel.class.getTypeName(),
                 action,
                 orgId,
+                // 消息异步传递数据时候  透传的traceId 以绑定微服务之间 完整的请求调用链路
                 UserContext.getCorrelationId());
 
         source.output().send(MessageBuilder.withPayload(change).build());

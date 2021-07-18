@@ -1,13 +1,13 @@
 spring:
   cloud:
     stream:
-      bindings:
-        output:
-            destination:  orgChangeTopic
-            content-type: application/json
-      kafka:
+      bindings:  #stream.bindings是所需配置的开始  用于服务将消息发布到Spring Cloud Stream 消息代理
+        output: # output是通道的名称 映射到在代码清单8-2中看到的source.output()通道
+            destination:  orgChangeTopic #这是要写入消息的消息队列(或主题)的名称
+            content-type: application/json #content-type 向spring cloud stream 提供了将要发送 和 接受什么类型的消息的提示(在本例中是json)
+      kafka:      #stream.bindings.kafka属性告诉spring 将使用kafka作为服务中的消息总线(可以使用RabbitMQ作为代替)
         binder:
-          zkNodes: localhost
+          zkNodes: localhost  #Zknodes 和 brokers属性告诉Spring Cloud Stream，kafka 和 zookeeper的网络位置
           brokers: localhost
 
 #Setting the logging levels for the service

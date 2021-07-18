@@ -42,6 +42,7 @@ public class OrganizationRestTemplateClient {
     public Organization getOrganization(String organizationId){
         logger.debug("In Licensing Service.getOrganization: {}", UserContext.getCorrelationId());
 
+        // 缓存里面没有数据的时候 就直接进行 RPC 调用
         Organization org = checkRedisCache(organizationId);
 
         if (org!=null){

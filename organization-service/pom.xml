@@ -66,11 +66,12 @@
       <artifactId>spring-cloud-starter-hystrix</artifactId>
     </dependency>
 
+      <!-- 用于核心 Spring Cloud Stream库 -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-stream</artifactId>
     </dependency>
-
+      <!-- 一个包含消息实现的库 -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-stream-kafka</artifactId>

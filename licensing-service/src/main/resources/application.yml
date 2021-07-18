@@ -2,10 +2,10 @@ spring:
   cloud:
     stream:
       bindings:
-        inboundOrgChanges:
+        inboundOrgChanges: #属性将input通道映射到 orgChangeTopic 队列
           destination: orgChangeTopic
           content-type: application/json
-          group: licensingGroup
+          group: licensingGroup  # 该 group 属性用于保证服务只处理一次
       kafka:
         binder:
           zkNodes: localhost

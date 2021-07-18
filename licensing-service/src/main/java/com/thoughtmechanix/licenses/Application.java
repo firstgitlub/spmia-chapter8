@@ -33,6 +33,7 @@ import java.util.List;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableCircuitBreaker
+// 注解告诉服务 使用Sink接口中定义的通道 来监听传入的消息
 @EnableBinding(Sink.class)
 public class Application {
 
@@ -56,6 +57,7 @@ public class Application {
         return template;
     }
 
+    // 用于设置到redis 服务器的实际数据库连接
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory jedisConnFactory = new JedisConnectionFactory();
@@ -64,6 +66,7 @@ public class Application {
         return jedisConnFactory;
     }
 
+    // 方法创建一个RedisTemplate 用于对Redis 服务器执行操作
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
         RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
@@ -71,7 +74,11 @@ public class Application {
         return template;
     }
 
-//    @StreamListener(Sink.INPUT)
+    /**
+     * 每次收到来自input 通道的消息时 Spring Cloud Stream将执行此方法
+     * @param args
+     */
+    //    @StreamListener(Sink.INPUT)
 //    public void loggerSink(OrganizationChangeModel orgChange) {
 //        logger.debug("Received an event for organization id {}", orgChange.getOrganizationId());
 //    }
